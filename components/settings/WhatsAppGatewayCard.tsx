@@ -195,7 +195,7 @@ export function WhatsAppGatewayCard({
             npm run wa:server
           </div>
           <p className="text-[10px] text-slate-500">
-            💡 <em>Catatan: Pengiriman pesan langsung 1-klik via WhatsApp tetap berfungsi normal kapan saja tanpa perlu daemon.</em>
+            <em>Catatan: Pengiriman pesan langsung 1-klik via WhatsApp tetap berfungsi normal kapan saja tanpa perlu daemon.</em>
           </p>
         </div>
       )}

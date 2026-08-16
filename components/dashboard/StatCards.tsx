@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Truck, AlertTriangle, CheckCircle2, Users } from "lucide-react";
+import { Truck, AlertTriangle, CheckCircle2, Users, ChevronRight } from "lucide-react";
 
 interface StatCardsProps {
   sedangBerjalan: number;
@@ -34,7 +34,7 @@ export function StatCards({
         </p>
         <div className="flex items-center justify-between mt-2 pt-1 border-t border-[var(--color-border)]/50 text-[11px] font-semibold text-[var(--color-primary)]">
           <span>Lihat Pengiriman</span>
-          <span>➔</span>
+          <ChevronRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
         </div>
       </Link>
 
@@ -56,7 +56,7 @@ export function StatCards({
         </p>
         <div className="flex items-center justify-between mt-2 pt-1 border-t border-[#FDE3C8] text-[11px] font-semibold text-[var(--color-warning-600)]">
           <span>Cek Kendala</span>
-          <span>➔</span>
+          <ChevronRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
         </div>
       </Link>
 
@@ -78,7 +78,7 @@ export function StatCards({
         </p>
         <div className="flex items-center justify-between mt-2 pt-1 border-t border-[#C6EFD9] text-[11px] font-semibold text-[var(--color-success-600)]">
           <span>Riwayat Selesai</span>
-          <span>➔</span>
+          <ChevronRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
         </div>
       </Link>
 
@@ -100,7 +100,7 @@ export function StatCards({
         </p>
         <div className="flex items-center justify-between mt-2 pt-1 border-t border-[var(--color-border)] text-[11px] font-semibold text-[var(--color-text-secondary)] group-hover:text-[var(--color-primary)]">
           <span>Customer & Supir</span>
-          <span>➔</span>
+          <ChevronRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
         </div>
       </Link>
     </div>

@@ -4,7 +4,10 @@ import { useState } from "react";
 import {
   User,
   Truck,
-  Building,
+  Building2,
+  Ship,
+  Plane,
+  Anchor,
   MessageSquare,
   Phone,
   MoreVertical,
@@ -53,10 +56,16 @@ export function ContactCard({ contact, onEdit }: ContactCardProps) {
     : "#";
 
   const Icon =
-    contact.kategori === "supir"
-      ? Truck
+    contact.kategori === "maskapai"
+      ? Plane
+      : contact.kategori === "pelayaran"
+      ? Ship
       : contact.kategori === "vendor_trucking"
-      ? Building
+      ? Truck
+      : contact.kategori === "depo_port"
+      ? Anchor
+      : contact.kategori === "customer"
+      ? Building2
       : User;
 
   async function handleDelete() {

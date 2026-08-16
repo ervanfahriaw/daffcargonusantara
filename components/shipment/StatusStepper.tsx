@@ -1,4 +1,4 @@
-import { Check, Clock, AlertTriangle, Circle } from "lucide-react";
+import { Check, Clock, AlertTriangle, Circle, Plane, Ship, Truck } from "lucide-react";
 import { type StatusPesanan, statusPesananConfig } from "@/components/shipment/StatusBadge";
 import { type JenisPengiriman, jenisPengirimanLabels } from "@/lib/validations/pesanan";
 
@@ -208,22 +208,31 @@ export function StatusStepper({
               Tracking Progres Pengiriman
             </h2>
             <span
-              className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
+              className={`inline-flex items-center gap-1 rounded-md px-2.5 py-0.5 text-[11px] font-semibold ${
                 moda === "udara"
-                  ? "bg-[#F3E8FF] text-[#7E22CE]"
+                  ? "bg-purple-50 text-purple-700 border border-purple-200"
                   : moda === "laut"
-                  ? "bg-[#E0F2FE] text-[#0369A1]"
-                  : "bg-[var(--color-surface-tint)] text-[var(--color-primary)]"
+                  ? "bg-sky-50 text-sky-700 border border-sky-200"
+                  : "bg-blue-50 text-blue-700 border border-blue-200"
               }`}
             >
-              {moda === "udara"
-                ? "✈️ Air Freight"
-                : moda === "laut"
-                ? "🚢 Sea Freight"
-                : "🚚 Trucking Darat"}
+              {moda === "udara" ? (
+                <Plane className="h-3 w-3 shrink-0" />
+              ) : moda === "laut" ? (
+                <Ship className="h-3 w-3 shrink-0" />
+              ) : (
+                <Truck className="h-3 w-3 shrink-0" />
+              )}
+              <span>
+                {moda === "udara"
+                  ? "Air Freight"
+                  : moda === "laut"
+                  ? "Sea Freight"
+                  : "Trucking Darat"}
+              </span>
             </span>
-            <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-bold text-slate-700 border border-slate-200">
-              {scopeConfig.icon} {scopeConfig.title}
+            <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-700 border border-slate-200">
+              {scopeConfig.title}
             </span>
           </div>
           <p className="text-xs text-[var(--color-text-secondary)] mt-0.5">

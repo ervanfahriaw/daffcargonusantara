@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Plus, Package, Send, TrendingUp, Sparkles, MessageCircle } from "lucide-react";
+import { Plus, Package, Send, TrendingUp, Sparkles, MessageCircle, ArrowRight } from "lucide-react";
 import { DailyBroadcastModal } from "@/components/notification/DailyBroadcastModal";
 
 interface QuickActionPanelProps {
@@ -60,11 +60,11 @@ export function QuickActionPanel({
           </div>
         </div>
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white group-hover:translate-x-1 transition-transform">
-          ➔
+          <ArrowRight className="h-4 w-4" />
         </div>
       </Link>
 
-      {/* ── Tombol Utama 2: 📢 Kirim Pembaruan Harian ke Client (WhatsApp) ── */}
+      {/* ── Tombol Utama 2: Kirim Pembaruan Harian ke Client (WhatsApp) ── */}
       <button
         type="button"
         onClick={() => setShowBroadcastModal(true)}
@@ -89,7 +89,7 @@ export function QuickActionPanel({
           </div>
         </div>
         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 text-white group-hover:translate-x-1 transition-transform">
-          ➔
+          <ArrowRight className="h-4 w-4" />
         </div>
       </button>
 

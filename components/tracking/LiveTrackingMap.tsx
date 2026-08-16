@@ -15,6 +15,7 @@ import {
   Gauge,
   Clock,
   Layers,
+  Share2,
 } from "lucide-react";
 import {
   getShipmentTrackingState,
@@ -149,7 +150,8 @@ export function LiveTrackingMap({ pesanan, onShareClick }: LiveTrackingMapProps)
               onClick={onShareClick}
               className="flex items-center gap-1.5 rounded-2xl bg-emerald-600 px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-emerald-700 transition-all touch-target"
             >
-              <span>📲 Bagikan ke Client</span>
+              <Share2 className="h-3.5 w-3.5 shrink-0" />
+              <span>Bagikan ke Client</span>
             </button>
           )}
           <button

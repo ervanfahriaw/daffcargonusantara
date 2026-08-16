@@ -1,7 +1,18 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Search, Plus, Users, UserPlus } from "lucide-react";
+import {
+  Search,
+  Plus,
+  Users,
+  Building2,
+  Plane,
+  Ship,
+  Truck,
+  User,
+  Anchor,
+  UserPlus,
+} from "lucide-react";
 import { ContactCard, type ContactData } from "@/components/contact/ContactCard";
 import { ContactFormModal } from "@/components/contact/ContactFormModal";
 import { type KategoriKontak } from "@/lib/validations/kontak";
@@ -39,13 +50,67 @@ export function ContactListClient({ initialContacts }: ContactListClientProps) {
   }, [initialContacts, activeTab, searchQuery]);
 
   // Count calculations
-  const countSemua = initialContacts.length;
-  const countCustomer = initialContacts.filter((c) => c.kategori === "customer").length;
-  const countVendor = initialContacts.filter((c) => c.kategori === "vendor_trucking").length;
-  const countSupir = initialContacts.filter((c) => c.kategori === "supir").length;
-  const countPelayaran = initialContacts.filter((c) => c.kategori === "pelayaran").length;
-  const countMaskapai = initialContacts.filter((c) => c.kategori === "maskapai").length;
-  const countDepo = initialContacts.filter((c) => c.kategori === "depo_port").length;
+  const counts = useMemo(() => ({
+    semua: initialContacts.length,
+    customer: initialContacts.filter((c) => c.kategori === "customer").length,
+    maskapai: initialContacts.filter((c) => c.kategori === "maskapai").length,
+    pelayaran: initialContacts.filter((c) => c.kategori === "pelayaran").length,
+    vendor_trucking: initialContacts.filter((c) => c.kategori === "vendor_trucking").length,
+    supir: initialContacts.filter((c) => c.kategori === "supir").length,
+    depo_port: initialContacts.filter((c) => c.kategori === "depo_port").length,
+  }), [initialContacts]);
+
+  const categories = [
+    {
+      id: "semua" as FilterTab,
+      label: "Semua",
+      count: counts.semua,
+      icon: Users,
+      activeClass: "bg-[var(--color-primary)] text-white border-[var(--color-primary)] shadow-sm",
+    },
+    {
+      id: "customer" as FilterTab,
+      label: "Customer",
+      count: counts.customer,
+      icon: Building2,
+      activeClass: "bg-[var(--color-primary)] text-white border-[var(--color-primary)] shadow-sm",
+    },
+    {
+      id: "maskapai" as FilterTab,
+      label: "Maskapai",
+      count: counts.maskapai,
+      icon: Plane,
+      activeClass: "bg-purple-600 text-white border-purple-600 shadow-sm",
+    },
+    {
+      id: "pelayaran" as FilterTab,
+      label: "Pelayaran",
+      count: counts.pelayaran,
+      icon: Ship,
+      activeClass: "bg-sky-600 text-white border-sky-600 shadow-sm",
+    },
+    {
+      id: "vendor_trucking" as FilterTab,
+      label: "Vendor Trucking",
+      count: counts.vendor_trucking,
+      icon: Truck,
+      activeClass: "bg-slate-800 text-white border-slate-800 shadow-sm",
+    },
+    {
+      id: "supir" as FilterTab,
+      label: "Supir",
+      count: counts.supir,
+      icon: User,
+      activeClass: "bg-teal-600 text-white border-teal-600 shadow-sm",
+    },
+    {
+      id: "depo_port" as FilterTab,
+      label: "Depo / Port",
+      count: counts.depo_port,
+      icon: Anchor,
+      activeClass: "bg-amber-600 text-white border-amber-600 shadow-sm",
+    },
+  ];
 
   return (
     <div className="space-y-5 pb-28">
@@ -76,153 +141,35 @@ export function ContactListClient({ initialContacts }: ContactListClientProps) {
       </div>
 
       {/* ── Filter Tabs / Chips ── */}
-      <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
-        <button
-          type="button"
-          onClick={() => setActiveTab("semua")}
-          className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs md:text-sm font-bold transition-all touch-target ${
-            activeTab === "semua"
-              ? "bg-[var(--color-primary)] text-white shadow-xs"
-              : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:bg-[var(--color-bg)]"
-          }`}
-        >
-          <span>Semua</span>
-          <span
-            className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${
-              activeTab === "semua"
-                ? "bg-white/20 text-white"
-                : "bg-[var(--color-neutral-100)] text-[var(--color-neutral-600)]"
-            }`}
-          >
-            {countSemua}
-          </span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab("customer")}
-          className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs md:text-sm font-bold transition-all touch-target ${
-            activeTab === "customer"
-              ? "bg-[var(--color-primary)] text-white shadow-xs"
-              : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:bg-[var(--color-bg)]"
-          }`}
-        >
-          <span>Customer</span>
-          <span
-            className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${
-              activeTab === "customer"
-                ? "bg-white/20 text-white"
-                : "bg-[var(--color-surface-tint)] text-[var(--color-primary)]"
-            }`}
-          >
-            {countCustomer}
-          </span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab("maskapai")}
-          className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs md:text-sm font-bold transition-all touch-target ${
-            activeTab === "maskapai"
-              ? "bg-[#9333EA] text-white shadow-xs"
-              : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:bg-[var(--color-bg)]"
-          }`}
-        >
-          <span>✈️ Maskapai</span>
-          <span
-            className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${
-              activeTab === "maskapai"
-                ? "bg-white/20 text-white"
-                : "bg-[#F3E8FF] text-[#7E22CE]"
-            }`}
-          >
-            {countMaskapai}
-          </span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab("pelayaran")}
-          className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs md:text-sm font-bold transition-all touch-target ${
-            activeTab === "pelayaran"
-              ? "bg-[#0284C7] text-white shadow-xs"
-              : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:bg-[var(--color-bg)]"
-          }`}
-        >
-          <span>🚢 Pelayaran</span>
-          <span
-            className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${
-              activeTab === "pelayaran"
-                ? "bg-white/20 text-white"
-                : "bg-[#E0F2FE] text-[#0369A1]"
-            }`}
-          >
-            {countPelayaran}
-          </span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab("vendor_trucking")}
-          className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs md:text-sm font-bold transition-all touch-target ${
-            activeTab === "vendor_trucking"
-              ? "bg-[var(--color-navy-900)] text-white shadow-xs"
-              : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:bg-[var(--color-bg)]"
-          }`}
-        >
-          <span>🚚 Vendor Trucking</span>
-          <span
-            className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${
-              activeTab === "vendor_trucking"
-                ? "bg-white/20 text-white"
-                : "bg-[#F3F4F6] text-[var(--color-navy-900)]"
-            }`}
-          >
-            {countVendor}
-          </span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab("supir")}
-          className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs md:text-sm font-bold transition-all touch-target ${
-            activeTab === "supir"
-              ? "bg-[var(--color-teal-500)] text-white shadow-xs"
-              : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:bg-[var(--color-bg)]"
-          }`}
-        >
-          <span>Supir</span>
-          <span
-            className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${
-              activeTab === "supir"
-                ? "bg-white/20 text-white"
-                : "bg-[var(--color-teal-100)] text-[var(--color-teal-500)]"
-            }`}
-          >
-            {countSupir}
-          </span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab("depo_port")}
-          className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs md:text-sm font-bold transition-all touch-target ${
-            activeTab === "depo_port"
-              ? "bg-[#D97706] text-white shadow-xs"
-              : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:bg-[var(--color-bg)]"
-          }`}
-        >
-          <span>⚓ Depo / Port</span>
-          <span
-            className={`rounded-full px-2 py-0.5 text-[11px] font-bold ${
-              activeTab === "depo_port"
-                ? "bg-white/20 text-white"
-                : "bg-[#FEF3C7] text-[#D97706]"
-            }`}
-          >
-            {countDepo}
-          </span>
-        </button>
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 pt-1 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+        {categories.map((tab) => {
+          const isActive = activeTab === tab.id;
+          const Icon = tab.icon;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveTab(tab.id)}
+              className={`shrink-0 whitespace-nowrap inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs md:text-sm font-semibold transition-all border touch-target ${
+                isActive
+                  ? tab.activeClass
+                  : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border-[var(--color-border)] hover:bg-[var(--color-bg)] hover:text-[var(--color-text-primary)]"
+              }`}
+            >
+              <Icon className="h-3.5 w-3.5 shrink-0" />
+              <span>{tab.label}</span>
+              <span
+                className={`inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[11px] font-bold ${
+                  isActive
+                    ? "bg-white/20 text-white"
+                    : "bg-[var(--color-neutral-100)] text-[var(--color-neutral-600)]"
+                }`}
+              >
+                {tab.count}
+              </span>
+            </button>
+          );
+        })}
       </div>
 
       {/* ── Contact Cards Grid / List ── */}

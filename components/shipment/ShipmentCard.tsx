@@ -7,6 +7,7 @@ import {
   Truck,
   Ship,
   Plane,
+  ArrowRight,
 } from "lucide-react";
 import { jenisArmadaLabels, type JenisArmada } from "@/lib/validations/pesanan";
 
@@ -131,17 +132,24 @@ export function ShipmentCard({ pesanan, shipment }: ShipmentCardProps) {
               Nomor Pesanan
             </span>
             <span
-              className={`rounded-full px-2 py-0.2 text-[10px] font-bold ${
+              className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-bold ${
                 isAir
-                  ? "bg-[#F3E8FF] text-[#7E22CE]"
+                  ? "bg-purple-50 text-purple-700 border border-purple-200"
                   : isSea
-                  ? "bg-[#E0F2FE] text-[#0369A1]"
-                  : "bg-[var(--color-surface-tint)] text-[var(--color-primary)]"
+                  ? "bg-sky-50 text-sky-700 border border-sky-200"
+                  : "bg-blue-50 text-blue-700 border border-blue-200"
               }`}
             >
-              {isAir ? "✈️ Udara" : isSea ? "🚢 Laut" : "🚚 Darat"}
+              {isAir ? (
+                <Plane className="h-3 w-3 shrink-0" />
+              ) : isSea ? (
+                <Ship className="h-3 w-3 shrink-0" />
+              ) : (
+                <Truck className="h-3 w-3 shrink-0" />
+              )}
+              <span>{isAir ? "Udara" : isSea ? "Laut" : "Darat"}</span>
             </span>
-            <span className="rounded-full bg-slate-100 px-1.5 py-0.2 text-[10px] font-bold text-slate-700 border border-slate-200">
+            <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-700 border border-slate-200">
               {scopeTag}
             </span>
           </div>
@@ -169,9 +177,7 @@ export function ShipmentCard({ pesanan, shipment }: ShipmentCardProps) {
           </span>
         </div>
 
-        <div className="text-[var(--color-text-secondary)] text-xs font-bold shrink-0">
-          ➔
-        </div>
+        <ArrowRight className="h-3.5 w-3.5 text-[var(--color-text-secondary)] shrink-0" />
 
         <div className="flex items-center gap-2 min-w-0 flex-1 justify-end">
           <MapPin className="h-3.5 w-3.5 text-[var(--color-teal-500)] shrink-0" />

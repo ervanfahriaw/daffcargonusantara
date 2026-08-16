@@ -229,8 +229,8 @@ export function PesananBaruForm({ initialContacts = [] }: PesananBaruFormProps) 
               <Truck className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-xs sm:text-sm font-bold text-[var(--color-navy-900)]">🚚 Darat</p>
-              <p className="text-[10px] text-[var(--color-text-secondary)] hidden sm:block">Trucking</p>
+              <p className="text-xs sm:text-sm font-bold text-[var(--color-navy-900)]">Darat</p>
+              <p className="text-[10px] text-[var(--color-text-secondary)] hidden sm:block">Trucking Domestik</p>
             </div>
           </button>
 
@@ -250,8 +250,8 @@ export function PesananBaruForm({ initialContacts = [] }: PesananBaruFormProps) 
               <Ship className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-xs sm:text-sm font-bold text-[var(--color-navy-900)]">🚢 Laut</p>
-              <p className="text-[10px] text-[var(--color-text-secondary)] hidden sm:block">Antarpulau</p>
+              <p className="text-xs sm:text-sm font-bold text-[var(--color-navy-900)]">Laut</p>
+              <p className="text-[10px] text-[var(--color-text-secondary)] hidden sm:block">Sea Freight</p>
             </div>
           </button>
 
@@ -271,7 +271,7 @@ export function PesananBaruForm({ initialContacts = [] }: PesananBaruFormProps) 
               <Plane className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-xs sm:text-sm font-bold text-[var(--color-navy-900)]">✈️ Udara</p>
+              <p className="text-xs sm:text-sm font-bold text-[var(--color-navy-900)]">Udara</p>
               <p className="text-[10px] text-[var(--color-text-secondary)] hidden sm:block">Air Freight</p>
             </div>
           </button>
@@ -293,6 +293,15 @@ export function PesananBaruForm({ initialContacts = [] }: PesananBaruFormProps) 
           {(["d2d", "d2p", "p2d", "p2p"] as const).map((scopeKey) => {
             const scope = jenisPengirimanLabels[scopeKey];
             const isSelected = jenisPengiriman === scopeKey;
+            const ScopeIcon =
+              scopeKey === "d2d"
+                ? Truck
+                : scopeKey === "d2p"
+                ? Navigation
+                : scopeKey === "p2d"
+                ? Ship
+                : Anchor;
+
             return (
               <button
                 key={scopeKey}
@@ -304,11 +313,23 @@ export function PesananBaruForm({ initialContacts = [] }: PesananBaruFormProps) 
                     : "border-[var(--color-border)] bg-white text-[var(--color-text-secondary)] hover:border-[var(--color-neutral-300)]"
                 }`}
               >
-                <span className="text-xl shrink-0 mt-0.5">{scope.icon}</span>
+                <div
+                  className={`flex h-9 w-9 items-center justify-center rounded-xl shrink-0 mt-0.5 ${
+                    isSelected
+                      ? "bg-[var(--color-primary)] text-white"
+                      : "bg-neutral-100 text-neutral-600"
+                  }`}
+                >
+                  <ScopeIcon className="h-4.5 w-4.5" />
+                </div>
                 <div className="min-w-0 flex-1">
-                  <p className={`text-xs sm:text-sm font-bold ${
-                    isSelected ? "text-[var(--color-primary)]" : "text-[var(--color-navy-900)]"
-                  }`}>
+                  <p
+                    className={`text-xs sm:text-sm font-bold ${
+                      isSelected
+                        ? "text-[var(--color-primary)]"
+                        : "text-[var(--color-navy-900)]"
+                    }`}
+                  >
                     {scope.title}
                   </p>
                   <p className="text-[11px] text-[var(--color-text-secondary)] mt-0.5 leading-snug">
@@ -1063,7 +1084,7 @@ export function PesananBaruForm({ initialContacts = [] }: PesananBaruFormProps) 
           disabled={loading}
           className="w-full rounded-2xl bg-[var(--color-primary)] py-4 text-center text-base font-bold text-white shadow-md hover:bg-[var(--color-primary-dark)] active:scale-[0.99] transition-all disabled:opacity-60 touch-target"
         >
-          {loading ? "Menyimpan Pesanan..." : "💾 Simpan Pesanan Kargo"}
+          {loading ? "Menyimpan Pesanan..." : "Simpan Pesanan Kargo"}
         </button>
       </div>
     </form>

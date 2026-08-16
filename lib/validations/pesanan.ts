@@ -4,35 +4,38 @@ export const modaPengirimanEnum = z.enum(["darat", "laut", "udara"]);
 export type ModaPengiriman = z.infer<typeof modaPengirimanEnum>;
 
 export const modaPengirimanLabels: Record<ModaPengiriman, string> = {
-  darat: "🚚 Darat (Trucking Domestik)",
-  laut: "🚢 Laut (Sea Freight Antarpulau)",
-  udara: "✈️ Udara (Air Freight Express)",
+  darat: "Darat (Trucking Domestik)",
+  laut: "Laut (Sea Freight Antarpulau)",
+  udara: "Udara (Air Freight Express)",
 };
 
 // ── Lingkup Layanan Serah Terima (Service Scope) ──
 export const jenisPengirimanEnum = z.enum(["d2d", "d2p", "p2d", "p2p"]);
 export type JenisPengiriman = z.infer<typeof jenisPengirimanEnum>;
 
-export const jenisPengirimanLabels: Record<JenisPengiriman, { title: string; subtitle: string; icon: string }> = {
+export const jenisPengirimanLabels: Record<
+  JenisPengiriman,
+  { title: string; subtitle: string; icon: string }
+> = {
   d2d: {
     title: "Door to Door (D2D)",
     subtitle: "Jemput di alamat pengirim & antar sampai alamat penerima",
-    icon: "🚪➡️🚪",
+    icon: "D2D",
   },
   d2p: {
     title: "Door to Port / Hub (D2P)",
     subtitle: "Jemput di alamat pengirim & penerima ambil di Pelabuhan/Bandara tujuan",
-    icon: "🚪➡️⚓",
+    icon: "D2P",
   },
   p2d: {
     title: "Port to Door (P2D)",
     subtitle: "Pengirim serah barang di Pelabuhan/Bandara asal & kami antar ke alamat penerima",
-    icon: "⚓➡️🚪",
+    icon: "P2D",
   },
   p2p: {
     title: "Port to Port (P2P)",
     subtitle: "Serah barang di Pelabuhan/Bandara asal & ambil di Pelabuhan/Bandara tujuan",
-    icon: "⚓➡️⚓",
+    icon: "P2P",
   },
 };
 

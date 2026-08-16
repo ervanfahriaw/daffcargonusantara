@@ -130,7 +130,7 @@ export function DynamicActionButton({
       const res = await updateStatusPesananAction(pesananId, targetStatus, customNote);
       if (res.success) {
         if (res.waSent) {
-          toast.success(`${res.message} 📢 Notifikasi WhatsApp otomatis terkirim ke +${res.waRecipient}!`);
+          toast.success(`${res.message} (Notifikasi WhatsApp terkirim ke +${res.waRecipient})`);
         } else {
           toast.success(res.message);
         }

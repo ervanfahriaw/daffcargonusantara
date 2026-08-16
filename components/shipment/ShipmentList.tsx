@@ -1,17 +1,37 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Search, X, Filter } from "lucide-react";
+import { Search, X, Filter, Layers, Clock, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { ShipmentCard, type ShipmentItem } from "@/components/shipment/ShipmentCard";
 import { EmptyState } from "@/components/shipment/EmptyState";
 
 type FilterTab = "Semua" | "Sedang Berjalan" | "Tertunda" | "Selesai";
 
-const FILTER_TABS: FilterTab[] = [
-  "Semua",
-  "Sedang Berjalan",
-  "Tertunda",
-  "Selesai",
+const FILTER_TABS: { id: FilterTab; label: string; icon: typeof Layers; activeClass: string }[] = [
+  {
+    id: "Semua",
+    label: "Semua",
+    icon: Layers,
+    activeClass: "bg-[var(--color-primary)] text-white border-[var(--color-primary)] shadow-sm",
+  },
+  {
+    id: "Sedang Berjalan",
+    label: "Sedang Berjalan",
+    icon: Clock,
+    activeClass: "bg-blue-600 text-white border-blue-600 shadow-sm",
+  },
+  {
+    id: "Tertunda",
+    label: "Tertunda",
+    icon: AlertTriangle,
+    activeClass: "bg-amber-600 text-white border-amber-600 shadow-sm",
+  },
+  {
+    id: "Selesai",
+    label: "Selesai",
+    icon: CheckCircle2,
+    activeClass: "bg-teal-600 text-white border-teal-600 shadow-sm",
+  },
 ];
 
 interface ShipmentListProps {
@@ -93,23 +113,25 @@ export function ShipmentList({ initialItems = [] }: ShipmentListProps) {
   return (
     <div className="space-y-4">
       {/* ── Filter Status (Horizontal Chips) ── */}
-      <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 pt-1 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
         {FILTER_TABS.map((tab) => {
-          const isActive = activeTab === tab;
-          const count = counts[tab];
+          const isActive = activeTab === tab.id;
+          const count = counts[tab.id];
+          const Icon = tab.icon;
           return (
             <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2.5 text-xs md:text-sm font-semibold transition-all touch-target border ${
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`shrink-0 whitespace-nowrap inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs md:text-sm font-semibold transition-all border touch-target ${
                 isActive
-                  ? "bg-[var(--color-primary)] text-white border-[var(--color-primary)] shadow-sm"
-                  : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border-[var(--color-border)] hover:bg-[var(--color-surface-tint)]"
+                  ? tab.activeClass
+                  : "bg-[var(--color-surface)] text-[var(--color-text-secondary)] border-[var(--color-border)] hover:bg-[var(--color-bg)] hover:text-[var(--color-text-primary)]"
               }`}
             >
-              <span>{tab}</span>
+              <Icon className="h-3.5 w-3.5 shrink-0" />
+              <span>{tab.label}</span>
               <span
-                className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
+                className={`inline-flex items-center justify-center rounded-full px-2 py-0.5 text-[11px] font-bold ${
                   isActive
                     ? "bg-white/20 text-white"
                     : "bg-[var(--color-neutral-100)] text-[var(--color-neutral-600)]"
