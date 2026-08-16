@@ -278,7 +278,7 @@ export type UpdateStatusResult =
   | { success: true; newStatus: StatusPesanan; message: string; waSent?: boolean; waRecipient?: string }
   | { success: false; error: string };
 
-export function mapToDatabaseStatus(status: StatusPesanan): string {
+function mapToDatabaseStatus(status: StatusPesanan): string {
   switch (status) {
     case "stuffing":
     case "gate_in_pelabuhan":
