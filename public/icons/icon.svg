@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B2545" />
+      <stop offset="100%" stop-color="#134074" />
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2FAFA0" />
+      <stop offset="100%" stop-color="#228B7E" />
+    </linearGradient>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2E6FF2" />
+      <stop offset="100%" stop-color="#1B4DC0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded App Icon Background -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+
+  <!-- Inner subtle border -->
+  <rect x="12" y="12" width="488" height="488" rx="100" fill="none" stroke="#2FAFA0" stroke-width="6" stroke-opacity="0.3" />
+
+  <!-- DCN Logo Monogram & Truck Icon -->
+  <g transform="translate(64, 80)">
+    <!-- Cargo Box of Truck -->
+    <rect x="40" y="70" width="200" height="150" rx="16" fill="url(#tealGrad)" />
+    <!-- White stripes on cargo container -->
+    <line x1="85" y1="85" x2="85" y2="205" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-opacity="0.6" />
+    <line x1="140" y1="85" x2="140" y2="205" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-opacity="0.6" />
+    <line x1="195" y1="85" x2="195" y2="205" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-opacity="0.6" />
+
+    <!-- Cabin of Truck -->
+    <path d="M 245 110 L 305 110 Q 330 110 335 135 L 345 180 Q 348 220 315 220 L 245 220 Z" fill="url(#primaryGrad)" />
+    <!-- Windshield -->
+    <path d="M 255 125 L 295 125 Q 312 125 316 142 L 322 170 L 255 170 Z" fill="#EEF4F8" />
+
+    <!-- Chassis Line -->
+    <rect x="25" y="210" width="335" height="18" rx="9" fill="#0B2545" />
+
+    <!-- Wheels -->
+    <circle cx="95" cy="235" r="32" fill="#1E293B" stroke="#64748B" stroke-width="6" />
+    <circle cx="95" cy="235" r="14" fill="#E2E8F0" />
+
+    <circle cx="285" cy="235" r="32" fill="#1E293B" stroke="#64748B" stroke-width="6" />
+    <circle cx="285" cy="235" r="14" fill="#E2E8F0" />
+  </g>
+
+  <!-- Text "DCN OPSHUB" -->
+  <text x="256" y="405" text-anchor="middle" fill="#FFFFFF" font-family="system-ui, -apple-system, sans-serif" font-size="44" font-weight="900" letter-spacing="4">
+    DCN OPSHUB
+  </text>
+  <text x="256" y="445" text-anchor="middle" fill="#2FAFA0" font-family="system-ui, -apple-system, sans-serif" font-size="19" font-weight="700" letter-spacing="2">
+    PT DAFF CARGO NUSANTARA
+  </text>
+</svg>

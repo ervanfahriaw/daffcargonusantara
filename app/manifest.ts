@@ -1,0 +1,29 @@
+import { MetadataRoute } from "next";
+
+export default function manifest(): MetadataRoute.Manifest {
+  return {
+    name: "DCN OpsHub — PT Daff Cargo Nusantara",
+    short_name: "DCN OpsHub",
+    description:
+      "Aplikasi Operasional Logistik & Forwarding Domestik — PT Daff Cargo Nusantara",
+    start_url: "/",
+    display: "standalone",
+    orientation: "portrait",
+    background_color: "#0B2545",
+    theme_color: "#0B2545",
+    icons: [
+      {
+        src: "/icons/icon.svg",
+        sizes: "any",
+        type: "image/svg+xml",
+        purpose: "any",
+      },
+      {
+        src: "/icons/icon.svg",
+        sizes: "any",
+        type: "image/svg+xml",
+        purpose: "maskable",
+      },
+    ],
+  };
+}

@@ -1,0 +1,229 @@
+﻿PT DAFF CARGO NUSANTARA
+CUSTOMS BROKER DAN FREIGHT FORWARDING
+PROFIL USAHA, PROSES BISNIS, DAN FLOWCHART OPERASIONAL
+Dokumen acuan untuk company profile, SOP, presentasi, dan pelatihan internal
+Disusun: Juli 2026
+1. Profil dan Ruang Lingkup Perusahaan
+PT Daff Cargo Nusantara adalah perusahaan jasa logistik yang mengoordinasikan pengurusan kepabeanan, pengangkutan internasional dan domestik, trucking, pergudangan, distribusi, serta project cargo melalui moda laut, udara, dan darat.
+Customs Broker / PPJK
+PPJK adalah badan usaha yang melakukan pengurusan pemenuhan kewajiban pabean untuk dan atas kuasa importir atau eksportir. Pelaksanaan customs clearance harus berdasarkan kuasa, data, dan dokumen yang sah dari pemilik barang.
+Freight Forwarding
+Freight forwarding adalah kegiatan merencanakan, mengatur, dan mengoordinasikan perpindahan barang dari pengirim sampai penerima dengan satu atau beberapa moda transportasi.
+Peran dan Nilai Tambah
+Satu titik koordinasi dari origin sampai tujuan.
+Pemeriksaan awal dokumen, HS Code, tarif, dan lartas.
+Koordinasi carrier, terminal, warehouse, trucking, dan instansi terkait.
+Monitoring milestone shipment dan pelaporan berkala.
+Pengendalian biaya, risiko, lead time, dan bukti serah terima.
+Layanan dijalankan sesuai perizinan dan kewenangan perusahaan.
+Jenis Pelanggan
+Importir, eksportir, manufaktur, energi, pertambangan, konstruksi/EPC, distributor, otomotif, ritel, farmasi, kimia, BUMN, instansi pemerintah, dan pelaku usaha lainnya yang memenuhi persyaratan.
+2. Jenis Layanan
+Layanan
+Ruang Lingkup
+Customs clearance impor
+PIB, billing, penjaluran, pemeriksaan, SPPB, dan pengeluaran.
+Customs clearance ekspor
+PEB, NPE, izin, pemasukan barang, dan koordinasi loading.
+Sea freight
+FCL, LCL, breakbulk, Ro-Ro, dan project cargo.
+Air freight
+General cargo, urgent cargo, dan special cargo.
+Domestic freight
+Pengiriman antarkota/antarpulau melalui darat, laut, atau udara.
+Door-to-door / port-to-port
+Layanan sesuai titik awal dan akhir yang disepakati.
+Trucking
+CDD, Fuso, wingbox, trailer, lowbed, dan armada khusus.
+Warehousing
+Receiving, storage, tally, picking, packing, dan distribusi.
+Project cargo
+Barang berat, oversize, bernilai tinggi, atau membutuhkan metode khusus.
+Dokumentasi
+BL/AWB, Invoice, Packing List, PIB, PEB, COO/SKA, dan pendukung.
+HS Code dan lartas
+Identifikasi klasifikasi dan persyaratan kementerian/lembaga.
+Cargo insurance
+Koordinasi polis dan klaim sesuai pertanggungan.
+Tracking
+Monitoring booking, transit, arrival, clearance, dan delivery.
+Layanan impor terintegrasi
+Freight, clearance, handling, dan delivery dengan biaya transparan.
+3. Pihak yang Terlibat dan Tanggung Jawab
+Pihak
+Tanggung Jawab Utama
+Customer
+Data, dokumen, instruksi, dan persetujuan.
+Sales
+Inquiry, kebutuhan pelanggan, dan hubungan komersial.
+Pricing/Procurement
+Tarif vendor, costing, validity, dan exclusion.
+Customer Service
+Job opening, koordinasi, timeline, dan status.
+Dokumentasi
+BL/AWB dan dokumen pengangkutan.
+EDI/PIB/PEB
+Draft dan penyampaian pemberitahuan pabean.
+PPJK
+Pengurusan kewajiban pabean berdasarkan kuasa.
+Operasional
+Pelaksanaan lapangan, clearance, dan delivery.
+Warehouse
+Receiving, penyimpanan, tally, dan release.
+Trucking
+Kendaraan, surat jalan, pengiriman, dan POD.
+Finance
+Pembayaran vendor, rekonsiliasi, dan billing.
+Origin forwarder
+Pickup, origin handling, dan pre-alert.
+Carrier
+Pengangkutan serta BL/AWB.
+Bea Cukai
+Pelayanan dan pengawasan kepabeanan.
+Instansi lartas
+Penerbitan izin atau rekomendasi.
+Terminal/TPS
+Bongkar, timbun, gate, dan penyerahan barang.
+Surveyor/Asuransi
+Verifikasi teknis, polis, dan klaim.
+4. Flowchart Proses Bisnis Utama
+Tahap
+PIC
+Dokumen/Kontrol
+Inquiry
+Sales
+Inquiry form
+Costing
+Pricing
+Cost sheet dan quotation
+Booking
+CS/Operation
+Booking confirmation
+Customs
+EDI/PPJK
+PIB/PEB dan respons sistem
+Delivery
+Operation/Trucking
+Surat jalan dan POD
+Billing
+Finance
+Cost sheet dan invoice
+5. Flowchart Customs Clearance Impor
+Kontrol utama: dokumen lengkap, identifikasi barang memadai, izin tersedia, Draft PIB disetujui importir, billing dibayar, respons pabean dipenuhi, dan SPPB terbit sebelum pengeluaran barang.
+6. Flowchart Customs Clearance Ekspor
+Kontrol utama: izin ekspor, booking dan cut-off, stuffing, seal, VGM, persetujuan Draft PEB, NPE, kesesuaian BL/AWB, serta COO/SKA apabila diperlukan.
+7. Flowchart Koordinasi Internal
+Setiap serah terima pekerjaan wajib menggunakan job number, PIC, checklist, dokumen pendukung, target waktu, dan status terakhir yang dapat ditelusuri.
+8. Matriks Serah Terima Internal
+Serah Terima
+Informasi Wajib
+Kontrol
+Sales → Pricing
+Rute, barang, volume, incoterm, moda, scope
+Inquiry checklist
+Pricing → Sales/CS
+Costing, validity, exclusion, vendor
+Approved quotation
+Sales → CS
+Quotation disetujui dan kontak customer
+Job handover
+CS → EDI
+Dokumen final, instruksi, timeline
+Document checklist
+EDI → Operasional
+Status PIB/PEB dan release
+Customs report
+Operasional → Trucking
+Lokasi, jadwal, cargo detail
+Transport order
+Trucking → CS
+Status kendaraan, surat jalan, POD
+Delivery tracker
+CS → Finance
+Cost sheet dan billable items
+Billing instruction
+Finance → Management
+Revenue, cost, margin, outstanding
+Profitability report
+Aturan Koordinasi
+Satu shipment menggunakan satu job number dan satu PIC utama.
+Semua instruksi dan persetujuan pelanggan dikonfirmasi tertulis.
+Draft PIB/PEB harus disetujui sebelum submit.
+Perubahan rute, biaya, atau ruang lingkup harus dicatat dan disetujui.
+Kendala kritis segera dieskalasikan.
+Job ditutup setelah POD, biaya vendor, billing, dan arsip selesai.
+9. Risiko dan Tindakan Mitigasi
+Risiko
+Dampak
+Pencegahan
+Tindakan Koreksi
+Dokumen tidak lengkap
+Clearance tertunda
+Pre-alert checklist
+Minta kelengkapan tertulis
+Data berbeda
+Pembetulan/pemeriksaan
+Cross-check dokumen
+Koreksi sebelum submit
+HS Code tidak tepat
+Kurang bayar/sengketa
+Technical datasheet dan review
+Konsultasi/pembetulan
+Izin lartas tidak tersedia
+Barang tertahan
+Compliance check
+Tunda proses dan urus izin
+Pre-alert terlambat
+Demurrage/storage
+Deadline dokumen
+Escalation ke origin
+Lewat cut-off
+Gagal berangkat
+Cut-off tracker
+Reschedule carrier
+Kendaraan tidak sesuai
+Kerusakan/keterlambatan
+Vehicle assessment
+Ganti armada
+POD hilang
+Penagihan tertunda
+POD digital
+Konfirmasi penerima
+Biaya vendor berbeda
+Margin turun
+Rate confirmation
+Rekonsiliasi/dispute
+Shipment tidak termonitor
+Keluhan pelanggan
+Milestone tracker
+Escalation PIC
+10. Standar Status Shipment
+Milestone
+Status Minimum
+Booking
+Carrier, jadwal, nomor booking
+Pickup
+Tanggal, kendaraan, dan pengemudi
+Departed
+ATD dan dokumen angkut
+In transit
+Posisi dan transshipment
+Arrived
+ATA dan status manifest
+Customs
+Draft, submit, billing, jalur, pemeriksaan
+Released
+Nomor dan tanggal SPPB/release
+Delivery
+Kendaraan dan estimasi tiba
+Delivered
+Waktu penerimaan dan POD
+Closed
+Dokumen dan billing selesai
+11. Catatan Kepatuhan
+Istilah “borongan impor” dalam dokumen resmi sebaiknya menggunakan “layanan impor terintegrasi”. Importir/eksportir, data transaksi, nilai pabean, jumlah, jenis, HS Code, dan perizinan harus benar serta dapat dipertanggungjawabkan. Layanan tidak boleh digunakan untuk peminjaman identitas/perizinan, under-invoicing, atau penghindaran kewajiban pabean.
+Flowchart ini merupakan kerangka kerja umum. Tahapan aktual wajib mengikuti respons resmi sistem, ketentuan kantor pabean, karakteristik barang, moda, fasilitas terminal, dan peraturan yang berlaku pada saat shipment diproses.
+Referensi Resmi
+JDIH Kementerian Keuangan – definisi Pengusaha Pengurusan Jasa Kepabeanan (PPJK).
+Direktorat Jenderal Bea dan Cukai – prosedur impor untuk dipakai dan penjaluran.
+Indonesia National Single Window – referensi ketentuan larangan dan pembatasan.
