@@ -6,9 +6,12 @@ export async function middleware(request: NextRequest) {
     request,
   });
 
-  // Jika Supabase belum dikonfigurasi, biarkan request lewat
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  // Supabase connection with defaults
+  const DEFAULT_SUPABASE_URL = "https://fvuhclexexsfzxsexzfu.supabase.co";
+  const DEFAULT_SUPABASE_ANON_KEY = "sb_publishable_DkjrWg1NOUeSjZ7cB4HZ2g_4m44sB2k";
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || DEFAULT_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || DEFAULT_SUPABASE_ANON_KEY;
 
   if (
     !supabaseUrl ||
