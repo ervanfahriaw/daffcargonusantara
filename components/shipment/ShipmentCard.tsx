@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { StatusBadge } from "@/components/shipment/StatusBadge";
+import { StatusBadge, getEffectiveStatus } from "@/components/shipment/StatusBadge";
 import {
   MapPin,
   ChevronRight,
@@ -58,9 +58,8 @@ function getActionLabel(status: string, isAir: boolean, isSea: boolean): string 
     case "terkirim":
       return "Buat Invoice";
     case "tertunda":
-      return "Cek Kendala";
+      return "Perbarui Progres";
     case "selesai":
-      return "Lihat Detail";
     default:
       return "Lihat Detail";
   }
@@ -83,6 +82,7 @@ interface ShipmentCardProps {
 
 export function ShipmentCard({ pesanan, shipment }: ShipmentCardProps) {
   const item = (pesanan || shipment)!;
+  const effectiveStatus = getEffectiveStatus(item);
 
   const isAir =
     item.catatan_muatan?.includes("[MODA: UDARA") ||
@@ -93,7 +93,7 @@ export function ShipmentCard({ pesanan, shipment }: ShipmentCardProps) {
       "dalam_penerbangan",
       "mendarat",
       "delivery_udara",
-    ].includes(item.status);
+    ].includes(effectiveStatus);
 
   const isSea =
     item.catatan_muatan?.includes("[MODA: LAUT") ||
@@ -104,9 +104,9 @@ export function ShipmentCard({ pesanan, shipment }: ShipmentCardProps) {
       "pelayaran",
       "kapal_tiba",
       "dooring",
-    ].includes(item.status);
+    ].includes(effectiveStatus);
 
-  const actionText = getActionLabel(item.status, isAir, isSea);
+  const actionText = getActionLabel(effectiveStatus, isAir, isSea);
   const shortAsal = formatShortAddress(item.alamat_asal);
   const shortTujuan = formatShortAddress(item.alamat_tujuan);
   const armadaLabel = item.jenis_armada
@@ -149,7 +149,7 @@ export function ShipmentCard({ pesanan, shipment }: ShipmentCardProps) {
             {item.nomor_pesanan}
           </h3>
         </div>
-        <StatusBadge status={item.status as any} />
+        <StatusBadge status={effectiveStatus} />
       </div>
 
       {/* ── Customer Info ── */}

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { StatusBadge, type StatusPesanan } from "@/components/shipment/StatusBadge";
+import { StatusBadge, type StatusPesanan, getEffectiveStatus } from "@/components/shipment/StatusBadge";
 import { StatusStepper, type RiwayatStatusItem } from "@/components/shipment/StatusStepper";
 import { LiveTrackingMap } from "@/components/tracking/LiveTrackingMap";
 import { type ModaPengiriman, type JenisPengiriman } from "@/lib/validations/pesanan";
@@ -96,6 +96,8 @@ export default async function PublicTrackingPage({ params }: PublicTrackingPageP
 
   const riwayat: RiwayatStatusItem[] = (riwayatData || []) as RiwayatStatusItem[];
 
+  const effectiveStatus = getEffectiveStatus(pesanan);
+
   // Deteksi moda pengiriman
   let moda: ModaPengiriman = "darat";
   if (
@@ -108,7 +110,7 @@ export default async function PublicTrackingPage({ params }: PublicTrackingPageP
       "dalam_penerbangan",
       "mendarat",
       "delivery_udara",
-    ].includes(pesanan.status)
+    ].includes(effectiveStatus)
   ) {
     moda = "udara";
   } else if (
@@ -121,7 +123,7 @@ export default async function PublicTrackingPage({ params }: PublicTrackingPageP
       "pelayaran",
       "kapal_tiba",
       "dooring",
-    ].includes(pesanan.status)
+    ].includes(effectiveStatus)
   ) {
     moda = "laut";
   }
@@ -180,7 +182,7 @@ export default async function PublicTrackingPage({ params }: PublicTrackingPageP
                 {pesanan.nomor_pesanan}
               </h2>
             </div>
-            <StatusBadge status={pesanan.status as any} />
+            <StatusBadge status={effectiveStatus} />
           </div>
 
           <div className="h-px bg-slate-700/60" />
@@ -204,7 +206,12 @@ export default async function PublicTrackingPage({ params }: PublicTrackingPageP
             <Sparkles className="h-4 w-4 text-teal-400" />
             <span>Peta Pelacakan Real-Time</span>
           </h3>
-          <LiveTrackingMap pesanan={pesanan} />
+          <LiveTrackingMap
+            pesanan={{
+              ...pesanan,
+              status: effectiveStatus,
+            }}
+          />
         </div>
 
         {/* ── Stepper Alur Pengiriman ── */}
@@ -214,7 +221,7 @@ export default async function PublicTrackingPage({ params }: PublicTrackingPageP
           </h3>
           <div className="rounded-3xl bg-slate-900/90 border border-slate-800 p-5 shadow-sm text-slate-900">
             <StatusStepper
-              currentStatus={pesanan.status}
+              currentStatus={effectiveStatus}
               riwayat={riwayat}
               moda={moda}
               jenisPengiriman={jenisPengiriman}

@@ -278,6 +278,29 @@ export type UpdateStatusResult =
   | { success: true; newStatus: StatusPesanan; message: string; waSent?: boolean; waRecipient?: string }
   | { success: false; error: string };
 
+export function mapToDatabaseStatus(status: StatusPesanan): string {
+  switch (status) {
+    case "stuffing":
+    case "gate_in_pelabuhan":
+    case "acceptance_bandara":
+    case "masuk_terminal_kargo":
+      return "pickup";
+    case "kapal_berangkat":
+    case "terbang":
+      return "berangkat";
+    case "pelayaran":
+    case "dalam_penerbangan":
+    case "dooring":
+    case "delivery_udara":
+      return "dalam_perjalanan";
+    case "kapal_tiba":
+    case "mendarat":
+      return "tiba";
+    default:
+      return status;
+  }
+}
+
 export async function updateStatusPesananAction(
   pesananId: string,
   newStatus: StatusPesanan,
@@ -299,8 +322,11 @@ export async function updateStatusPesananAction(
       };
     }
 
-    // 2. Update status di tabel pesanan
-    const { error: updateError } = await supabase
+    // 2. Update status di tabel pesanan dengan mekanisme fallback enum Supabase
+    let updateError: any = null;
+    let effectiveDbStatus = newStatus as string;
+
+    const firstAttempt = await supabase
       .from("pesanan")
       .update({
         status: newStatus,
@@ -308,11 +334,44 @@ export async function updateStatusPesananAction(
       })
       .eq("id", pesananId);
 
+    if (firstAttempt.error) {
+      if (firstAttempt.error.code === "22P02") {
+        // Fallback untuk database yang memiliki enum base
+        effectiveDbStatus = mapToDatabaseStatus(newStatus);
+
+        const { data: currentP } = await supabase
+          .from("pesanan")
+          .select("catatan_muatan")
+          .eq("id", pesananId)
+          .single();
+
+        const cleanCatatan = (currentP?.catatan_muatan || "")
+          .replace(/\[MILESTONE:[^\]]+\]/g, "")
+          .trim();
+        const updatedCatatan = cleanCatatan
+          ? `${cleanCatatan}\n[MILESTONE:${newStatus}]`
+          : `[MILESTONE:${newStatus}]`;
+
+        const fallbackAttempt = await supabase
+          .from("pesanan")
+          .update({
+            status: effectiveDbStatus,
+            catatan_muatan: updatedCatatan,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", pesananId);
+
+        updateError = fallbackAttempt.error;
+      } else {
+        updateError = firstAttempt.error;
+      }
+    }
+
     if (updateError) {
       console.error("Gagal update status pesanan:", updateError);
       return {
         success: false,
-        error: "Gagal memperbarui status di database.",
+        error: "Gagal memperbarui status di database: " + updateError.message,
       };
     }
 
@@ -321,11 +380,19 @@ export async function updateStatusPesananAction(
     const defaultCatatan = catatan || `Status diperbarui ke ${statusLabel}`;
 
     try {
-      await supabase.from("riwayat_status").insert({
+      const histFirst = await supabase.from("riwayat_status").insert({
         pesanan_id: pesananId,
         status: newStatus,
         catatan: defaultCatatan,
       });
+
+      if (histFirst.error && histFirst.error.code === "22P02") {
+        await supabase.from("riwayat_status").insert({
+          pesanan_id: pesananId,
+          status: effectiveDbStatus,
+          catatan: defaultCatatan,
+        });
+      }
     } catch (histErr) {
       console.warn("Notice: Gagal insert riwayat status:", histErr);
     }
@@ -376,23 +443,32 @@ export async function updateStatusPesananAction(
             }
           );
 
-          // Kirim via real WA Gateway daemon (Port 3001)
-          const gatewayRes = await fetch("http://127.0.0.1:3001/api/send", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              phone: targetPhone,
-              message: formattedMsg,
-            }),
-          });
+        const recipientsToSend = new Set<string>();
+        if (targetPhone) recipientsToSend.add(targetPhone);
+        recipientsToSend.add("628892114763");
 
-          if (gatewayRes.ok) {
-            const gwData = await gatewayRes.json();
-            if (gwData.success) {
-              waSent = true;
-              waRecipient = gwData.recipient || targetPhone;
+        for (const phone of recipientsToSend) {
+          try {
+            const gatewayRes = await fetch("http://127.0.0.1:3001/api/send", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                phone,
+                message: formattedMsg,
+              }),
+            });
+
+            if (gatewayRes.ok) {
+              const gwData = await gatewayRes.json();
+              if (gwData.success) {
+                waSent = true;
+                waRecipient = phone;
+              }
             }
+          } catch (sendErr) {
+            console.warn(`[AUTO-WA] Gagal kirim ke ${phone}:`, sendErr);
           }
+        }
         }
       }
     } catch (waErr: any) {

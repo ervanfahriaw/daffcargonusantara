@@ -12,7 +12,7 @@ import {
 } from "@/components/contact/ContextualContactList";
 import { LiveTrackingMap } from "@/components/tracking/LiveTrackingMap";
 import { ShareTrackingModal } from "@/components/tracking/ShareTrackingModal";
-import { type StatusPesanan } from "@/components/shipment/StatusBadge";
+import { type StatusPesanan, getEffectiveStatus } from "@/components/shipment/StatusBadge";
 import { jenisArmadaLabels, type JenisArmada, type ModaPengiriman, type JenisPengiriman } from "@/lib/validations/pesanan";
 
 export type TabType = "tracking" | "dokumen" | "keuangan" | "kontak";
@@ -37,39 +37,32 @@ interface DetailPesananTabsProps {
     tarif_customer?: number | null;
     biaya_vendor?: number | null;
     biaya_lainnya?: number | null;
-    kontak_customer?: {
-      id: string;
-      nama: string;
-      nomor_telepon: string;
-      perusahaan?: string | null;
-    } | null;
-    vendor_trucking?: {
-      id: string;
-      nama: string;
-      nomor_telepon: string;
-      perusahaan?: string | null;
-    } | null;
-    supir?: {
-      id: string;
-      nama: string;
-      nomor_telepon: string;
-    } | null;
+    vendor_trucking?: any;
+    supir?: any;
+    kontak_customer?: any;
+    pelayaran?: any;
+    depo_port?: any;
   };
-  riwayat: RiwayatStatusItem[];
+  riwayat?: RiwayatStatusItem[];
+  riwayatStatus?: RiwayatStatusItem[];
   dokumen?: DokumenRecord[];
   allContacts?: ContactInfo[];
 }
 
 export function DetailPesananTabs({
   pesanan,
-  riwayat,
+  riwayat = [],
+  riwayatStatus,
   dokumen = [],
   allContacts = [],
 }: DetailPesananTabsProps) {
   const [activeTab, setActiveTab] = useState<TabType>("tracking");
-  const [isShareOpen, setIsShareOpen] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
 
-  // Deteksi moda pengiriman (Darat, Laut, atau Udara)
+  const activeRiwayat = riwayatStatus || riwayat;
+  const effectiveStatus = getEffectiveStatus(pesanan);
+
+  // Deteksi moda pengiriman dari data pesanan
   let moda: ModaPengiriman = "darat";
   if (
     pesanan.catatan_muatan?.includes("[MODA: UDARA") ||
@@ -80,7 +73,7 @@ export function DetailPesananTabs({
       "dalam_penerbangan",
       "mendarat",
       "delivery_udara",
-    ].includes(pesanan.status)
+    ].includes(effectiveStatus)
   ) {
     moda = "udara";
   } else if (
@@ -92,7 +85,7 @@ export function DetailPesananTabs({
       "pelayaran",
       "kapal_tiba",
       "dooring",
-    ].includes(pesanan.status)
+    ].includes(effectiveStatus)
   ) {
     moda = "laut";
   }
@@ -168,16 +161,19 @@ export function DetailPesananTabs({
       {/* ── ISI TAB 1: TRACKING ── */}
       {activeTab === "tracking" && (
         <div className="space-y-6">
-          {/* Live Tracking Map Koordinat & Rute */}
+          {/* Peta Live Tracking Domestik */}
           <LiveTrackingMap
-            pesanan={pesanan}
-            onShareClick={() => setIsShareOpen(true)}
+            pesanan={{
+              ...pesanan,
+              status: effectiveStatus,
+            }}
+            onShareClick={() => setShowShareModal(true)}
           />
 
           {/* Stepper Vertikal */}
           <StatusStepper
-            currentStatus={pesanan.status}
-            riwayat={riwayat}
+            currentStatus={effectiveStatus}
+            riwayat={activeRiwayat}
             moda={moda}
             jenisPengiriman={jenisPengiriman}
           />
@@ -395,7 +391,7 @@ export function DetailPesananTabs({
           pesananId={pesanan.id}
           nomorPesanan={pesanan.nomor_pesanan}
           namaCustomer={pesanan.nama_customer}
-          currentStatus={pesanan.status}
+          currentStatus={effectiveStatus}
           alamatAsal={pesanan.alamat_asal}
           alamatTujuan={pesanan.alamat_tujuan}
           kontakCustomer={pesanan.kontak_customer}
@@ -408,7 +404,7 @@ export function DetailPesananTabs({
       {/* ── Dynamic Action Button Sticky ── */}
       <DynamicActionButton
         pesananId={pesanan.id}
-        currentStatus={pesanan.status}
+        currentStatus={effectiveStatus}
         moda={moda}
         jenisPengiriman={jenisPengiriman}
         onNavigateTab={(tab) => setActiveTab(tab)}
@@ -416,9 +412,12 @@ export function DetailPesananTabs({
 
       {/* ── Modal Bagikan Live Tracking ── */}
       <ShareTrackingModal
-        isOpen={isShareOpen}
-        onClose={() => setIsShareOpen(false)}
-        pesanan={pesanan}
+        isOpen={showShareModal}
+        onClose={() => setShowShareModal(false)}
+        pesanan={{
+          ...pesanan,
+          status: effectiveStatus,
+        }}
       />
     </div>
   );

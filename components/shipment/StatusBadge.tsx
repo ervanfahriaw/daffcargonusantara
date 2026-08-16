@@ -185,6 +185,18 @@ interface StatusBadgeProps {
   className?: string;
 }
 
+export function getEffectiveStatus(pesanan?: {
+  status?: string | null;
+  catatan_muatan?: string | null;
+} | null): StatusPesanan {
+  if (!pesanan) return "booking";
+  const match = pesanan.catatan_muatan?.match(/\[MILESTONE:([a-z_]+)\]/i);
+  if (match && match[1] && statusPesananConfig[match[1] as StatusPesanan]) {
+    return match[1] as StatusPesanan;
+  }
+  return (pesanan.status as StatusPesanan) || "booking";
+}
+
 export function StatusBadge({ status, className = "" }: StatusBadgeProps) {
   const config =
     statusPesananConfig[status as StatusPesanan] ||

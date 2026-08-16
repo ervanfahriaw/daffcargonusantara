@@ -307,6 +307,9 @@ export function getShipmentTrackingState(pesanan: {
   plat_nomor?: string | null;
 }): LiveTrackingState {
   // Deteksi moda
+  const milestoneMatch = pesanan.catatan_muatan?.match(/\[MILESTONE:([a-z_]+)\]/i);
+  const effectiveStatus = (milestoneMatch && milestoneMatch[1] ? milestoneMatch[1] : pesanan.status) || "booking";
+
   let moda: "darat" | "laut" | "udara" = "darat";
   if (
     pesanan.catatan_muatan?.includes("[MODA: UDARA") ||
@@ -318,7 +321,7 @@ export function getShipmentTrackingState(pesanan: {
       "dalam_penerbangan",
       "mendarat",
       "delivery_udara",
-    ].includes(pesanan.status)
+    ].includes(effectiveStatus)
   ) {
     moda = "udara";
   } else if (
@@ -331,7 +334,7 @@ export function getShipmentTrackingState(pesanan: {
       "pelayaran",
       "kapal_tiba",
       "dooring",
-    ].includes(pesanan.status)
+    ].includes(effectiveStatus)
   ) {
     moda = "laut";
   }
@@ -340,7 +343,7 @@ export function getShipmentTrackingState(pesanan: {
   const origin = resolveCoordinatesForLocation(pesanan.alamat_asal, moda);
   const destination = resolveCoordinatesForLocation(pesanan.alamat_tujuan, moda);
 
-  const { percent, label: statusLabel } = getProgressForStatus(pesanan.status, moda);
+  const { percent, label: statusLabel } = getProgressForStatus(effectiveStatus, moda);
   const totalDistance = calculateDistanceKm(origin.lat, origin.lng, destination.lat, destination.lng);
   const remainingDistance = Math.round(totalDistance * (1 - percent / 100));
 
@@ -372,14 +375,14 @@ export function getShipmentTrackingState(pesanan: {
   let speedText = "0 Km/jam";
   let altitudeText: string | undefined;
 
-  if (["dalam_perjalanan", "berangkat", "dooring"].includes(pesanan.status)) {
+  if (["dalam_perjalanan", "berangkat", "dooring"].includes(effectiveStatus)) {
     speedText = "62 Km/jam";
-  } else if (["pelayaran", "kapal_berangkat"].includes(pesanan.status)) {
+  } else if (["pelayaran", "kapal_berangkat"].includes(effectiveStatus)) {
     speedText = "14.5 Knot (~27 Km/jam)";
-  } else if (["dalam_penerbangan", "terbang"].includes(pesanan.status)) {
+  } else if (["dalam_penerbangan", "terbang"].includes(effectiveStatus)) {
     speedText = "780 Km/jam (420 Knot)";
     altitudeText = "34.000 Kaki (FL340)";
-  } else if (pesanan.status === "terkirim" || pesanan.status === "selesai") {
+  } else if (effectiveStatus === "terkirim" || effectiveStatus === "selesai") {
     speedText = "Telah Sandar / Tiba di Tujuan";
   }
 

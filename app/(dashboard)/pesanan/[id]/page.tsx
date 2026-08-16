@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Header } from "@/components/layout/Header";
-import { StatusBadge, type StatusPesanan } from "@/components/shipment/StatusBadge";
+import { StatusBadge, type StatusPesanan, getEffectiveStatus } from "@/components/shipment/StatusBadge";
 import { DetailPesananTabs } from "@/components/shipment/DetailPesananTabs";
 import { type RiwayatStatusItem } from "@/components/shipment/StatusStepper";
 import { type DokumenRecord } from "@/components/document/DocumentList";
@@ -118,7 +118,7 @@ export default async function DetailPesananPage({ params }: DetailPesananPagePro
                 {pesanan.nomor_pesanan}
               </h1>
             </div>
-            <StatusBadge status={pesanan.status} />
+            <StatusBadge status={getEffectiveStatus(pesanan)} />
           </div>
 
           <div className="h-px bg-[var(--color-border)]" />
