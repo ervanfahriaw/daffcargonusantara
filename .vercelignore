@@ -1,0 +1,9 @@
+# Vercel deployment ignore
+/gateway/
+/.wwebjs_auth/
+/.wwebjs_cache/
+tests/
+scripts/
+docs/
+.agents/
+*.docx

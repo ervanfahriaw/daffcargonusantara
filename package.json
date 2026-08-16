@@ -7,7 +7,7 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
-    "wa:server": "node services/wa-gateway/server.mjs"
+    "wa:server": "node gateway/wa-gateway/server.mjs"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.6.1",
