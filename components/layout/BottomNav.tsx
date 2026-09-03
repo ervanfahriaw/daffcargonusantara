@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Package, UserCircle, Menu } from "lucide-react";
+import { Home, Package, FileText, UserCircle, Menu } from "lucide-react";
 
 const navItems = [
   {
@@ -14,6 +14,11 @@ const navItems = [
     label: "Pesanan",
     href: "/pesanan",
     icon: Package,
+  },
+  {
+    label: "Dokumen",
+    href: "/dokumen",
+    icon: FileText,
   },
   {
     label: "Kontak",

@@ -136,19 +136,19 @@ export default async function BerandaPage() {
         {/* ── Banner Pasang PWA ke Home Screen (Jika didukung browser) ── */}
         <InstallPromptBanner />
 
+        {/* ── Tombol Aksi Utama & Ringkasan Nilai Operasional ── */}
+        <QuickActionPanel
+          totalTarif={totalTarifCustomer}
+          totalMargin={totalMarginEstimasi}
+          activeShipments={activeShipments}
+        />
+
         {/* ── 4 Stat Cards Ringkasan Eksekutif ── */}
         <StatCards
           sedangBerjalan={sedangBerjalanCount}
           perluPerhatian={perluPerhatianCount}
           selesai={selesaiCount}
           totalKontak={totalKontakCount}
-        />
-
-        {/* ── Tombol Aksi Utama & Ringkasan Nilai Operasional ── */}
-        <QuickActionPanel
-          totalTarif={totalTarifCustomer}
-          totalMargin={totalMarginEstimasi}
-          activeShipments={activeShipments}
         />
 
         {/* ── Grafik Aktivitas Mingguan ── */}

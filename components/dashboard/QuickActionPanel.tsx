@@ -41,38 +41,69 @@ export function QuickActionPanel({
 
   return (
     <div className="space-y-3.5">
-      {/* ── Tombol Utama 1: + Buat Pesanan Baru ── */}
-      <Link
-        href="/pesanan/baru"
-        className="w-full flex items-center justify-between rounded-3xl bg-[var(--color-primary)] p-5 text-white shadow-md hover:bg-[var(--color-primary-dark)] active:scale-[0.99] transition-all touch-target group"
-      >
-        <div className="flex items-center gap-3.5">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 text-white backdrop-blur-xs">
-            <Plus className="h-6 w-6 stroke-[2.5]" />
+      {/* ── 2 Tombol Aksi Utama: Buat Pesanan & Buat Dokumen ── */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {/* Tombol 1: Buat Pesanan Baru */}
+        <Link
+          href="/pesanan/baru"
+          className="flex items-center justify-between rounded-3xl bg-[var(--color-primary)] p-4 md:p-5 text-white shadow-md hover:bg-[var(--color-primary-dark)] active:scale-[0.99] transition-all touch-target group"
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/20 text-white backdrop-blur-xs shrink-0">
+              <Plus className="h-6 w-6 stroke-[2.5]" />
+            </div>
+            <div className="text-left min-w-0">
+              <h3 className="text-base font-bold leading-tight truncate">
+                Pesanan Baru
+              </h3>
+              <p className="text-xs text-white/80 mt-0.5 truncate">
+                Booking muatan & armada
+              </p>
+            </div>
           </div>
-          <div className="text-left">
-            <h3 className="text-base md:text-lg font-bold leading-tight">
-              Buat Pesanan Baru
-            </h3>
-            <p className="text-xs text-white/80 mt-0.5">
-              Catat booking kargo, customer & armada
-            </p>
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 text-white group-hover:translate-x-1 transition-transform shrink-0">
+            <ArrowRight className="h-4 w-4" />
           </div>
-        </div>
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white group-hover:translate-x-1 transition-transform">
-          <ArrowRight className="h-4 w-4" />
-        </div>
-      </Link>
+        </Link>
 
-      {/* ── Tombol Utama 2: Kirim Pembaruan Harian ke Client (WhatsApp) ── */}
+        {/* Tombol 2: Buat Dokumen Cepat */}
+        <Link
+          href="/dokumen"
+          className="flex items-center justify-between rounded-3xl bg-[var(--color-navy-900)] p-4 md:p-5 text-white shadow-md hover:bg-[var(--color-navy-700)] active:scale-[0.99] transition-all touch-target group border border-white/10"
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/20 text-white backdrop-blur-xs shrink-0">
+              <FileText className="h-6 w-6 stroke-[2]" />
+            </div>
+            <div className="text-left min-w-0">
+              <div className="flex items-center gap-1.5">
+                <h3 className="text-base font-bold leading-tight truncate">
+                  Buat Dokumen
+                </h3>
+                <span className="rounded-full bg-white/20 px-1.5 py-0.2 text-[9px] font-bold text-white">
+                  Cepat
+                </span>
+              </div>
+              <p className="text-xs text-white/80 mt-0.5 truncate">
+                Surat Jalan, Invoice, POD
+              </p>
+            </div>
+          </div>
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 text-white group-hover:translate-x-1 transition-transform shrink-0">
+            <ArrowRight className="h-4 w-4" />
+          </div>
+        </Link>
+      </div>
+
+      {/* ── Tombol Utama 3: Kirim Pembaruan Harian ke Client (WhatsApp) ── */}
       <button
         type="button"
         onClick={() => setShowBroadcastModal(true)}
-        className="w-full flex items-center justify-between rounded-3xl bg-emerald-600 p-4 md:p-5 text-white shadow-md hover:bg-emerald-700 active:scale-[0.99] transition-all touch-target group"
+        className="w-full flex items-center justify-between rounded-3xl bg-emerald-600 p-4 text-white shadow-sm hover:bg-emerald-700 active:scale-[0.99] transition-all touch-target group"
       >
         <div className="flex items-center gap-3.5 text-left">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/20 text-white backdrop-blur-xs">
-            <MessageCircle className="h-6 w-6 fill-current" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/20 text-white backdrop-blur-xs shrink-0">
+            <MessageCircle className="h-5 w-5 fill-current" />
           </div>
           <div>
             <div className="flex items-center gap-2">
@@ -88,33 +119,10 @@ export function QuickActionPanel({
             </p>
           </div>
         </div>
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 text-white group-hover:translate-x-1 transition-transform">
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 text-white group-hover:translate-x-1 transition-transform shrink-0">
           <ArrowRight className="h-4 w-4" />
         </div>
       </button>
-
-      {/* ── Tombol Utama 3: Buat Dokumen (Surat Jalan / Invoice / POD) ── */}
-      <Link
-        href="/dokumen"
-        className="w-full flex items-center justify-between rounded-3xl bg-[var(--color-navy-900)] p-4 md:p-5 text-white shadow-md hover:bg-[var(--color-navy-700)] active:scale-[0.99] transition-all touch-target group border border-white/10"
-      >
-        <div className="flex items-center gap-3.5 text-left">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15 text-white backdrop-blur-xs">
-            <FileText className="h-6 w-6 stroke-[2]" />
-          </div>
-          <div>
-            <h3 className="text-sm md:text-base font-bold leading-tight">
-              Buat Dokumen Cepat
-            </h3>
-            <p className="text-xs text-white/80 mt-0.5">
-              Surat Jalan, Invoice, Cost Sheet, atau POD
-            </p>
-          </div>
-        </div>
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 text-white group-hover:translate-x-1 transition-transform">
-          <ArrowRight className="h-4 w-4" />
-        </div>
-      </Link>
 
       {/* ── Ringkasan Nilai Transaksi & Margin Bersih ── */}
       <div className="rounded-3xl bg-[var(--color-surface)] p-5 border border-[var(--color-border)] shadow-xs space-y-3">
