@@ -211,13 +211,14 @@ export interface InvoiceData {
 }
 
 export function InvoicePDF({ data }: { data: InvoiceData }) {
-  const tanggalFormat = new Date(data.created_at || Date.now()).toLocaleDateString(
+  const baseTime = new Date(data.created_at || "2026-01-01").getTime();
+  const tanggalFormat = new Date(baseTime).toLocaleDateString(
     "id-ID",
     { day: "numeric", month: "long", year: "numeric" }
   );
 
   const dueDateFormat = new Date(
-    Date.now() + 14 * 24 * 60 * 60 * 1000
+    baseTime + 14 * 24 * 60 * 60 * 1000
   ).toLocaleDateString("id-ID", {
     day: "numeric",
     month: "long",

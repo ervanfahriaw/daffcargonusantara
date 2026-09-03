@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Plus, Package, Send, TrendingUp, Sparkles, MessageCircle, ArrowRight } from "lucide-react";
+import { Plus, Package, Send, TrendingUp, Sparkles, MessageCircle, ArrowRight, FileText } from "lucide-react";
 import { DailyBroadcastModal } from "@/components/notification/DailyBroadcastModal";
 
 interface QuickActionPanelProps {
@@ -92,6 +92,29 @@ export function QuickActionPanel({
           <ArrowRight className="h-4 w-4" />
         </div>
       </button>
+
+      {/* ── Tombol Utama 3: Buat Dokumen (Surat Jalan / Invoice / POD) ── */}
+      <Link
+        href="/dokumen"
+        className="w-full flex items-center justify-between rounded-3xl bg-[var(--color-navy-900)] p-4 md:p-5 text-white shadow-md hover:bg-[var(--color-navy-700)] active:scale-[0.99] transition-all touch-target group border border-white/10"
+      >
+        <div className="flex items-center gap-3.5 text-left">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15 text-white backdrop-blur-xs">
+            <FileText className="h-6 w-6 stroke-[2]" />
+          </div>
+          <div>
+            <h3 className="text-sm md:text-base font-bold leading-tight">
+              Buat Dokumen Cepat
+            </h3>
+            <p className="text-xs text-white/80 mt-0.5">
+              Surat Jalan, Invoice, Cost Sheet, atau POD
+            </p>
+          </div>
+        </div>
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 text-white group-hover:translate-x-1 transition-transform">
+          <ArrowRight className="h-4 w-4" />
+        </div>
+      </Link>
 
       {/* ── Ringkasan Nilai Transaksi & Margin Bersih ── */}
       <div className="rounded-3xl bg-[var(--color-surface)] p-5 border border-[var(--color-border)] shadow-xs space-y-3">

@@ -223,7 +223,7 @@ export function interpolatePositionOnRoute(
   const t = Math.max(0, Math.min(1, progress));
 
   let lat = origin.lat + (destination.lat - origin.lat) * t;
-  let lng = origin.lng + (destination.lng - origin.lng) * t;
+  const lng = origin.lng + (destination.lng - origin.lng) * t;
 
   // Jika rute laut antarpulau, tambahkan lengkungan alur laut realistis (ALKI)
   if (isMaritimeCurve && t > 0.05 && t < 0.95) {

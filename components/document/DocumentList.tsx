@@ -68,13 +68,15 @@ export function DocumentList({
 
   return (
     <div className="space-y-4">
-      {/* Tooltip Petunjuk Otomatis */}
+      {/* Tooltip Petunjuk Arsip Dokumen */}
       <div className="flex items-start gap-3 rounded-2xl bg-[var(--color-surface-tint)] p-4 border border-[var(--color-border)]">
         <Info className="h-5 w-5 text-[var(--color-primary)] shrink-0 mt-0.5" />
-        <p className="text-xs md:text-sm text-[var(--color-navy-900)] leading-relaxed">
-          <strong>Otomatis:</strong> Dokumen otomatis terisi dari data pesanan
-          — kamu tidak perlu ketik ulang.
-        </p>
+        <div className="text-xs md:text-sm text-[var(--color-navy-900)] leading-relaxed">
+          <p className="font-bold">Arsip Dokumen Pesanan:</p>
+          <p className="text-[var(--color-text-secondary)] mt-0.5">
+            Dokumen yang sudah diterbitkan dapat Anda lihat, unduh, dan bagikan ke WhatsApp langsung dari sini. Untuk membuat dokumen baru, silakan gunakan menu <strong>Buat Dokumen</strong> di Beranda.
+          </p>
+        </div>
       </div>
 
       {/* 4 Kartu Dokumen */}
@@ -93,8 +95,6 @@ export function DocumentList({
               description={item.description}
               isCreated={isCreated}
               createdDate={doc?.created_at}
-              currentPlatNomor={currentPlatNomor}
-              currentSupirNama={currentSupirNama}
               customerPhone={customerPhone}
               alamatAsal={alamatAsal}
               alamatTujuan={alamatTujuan}

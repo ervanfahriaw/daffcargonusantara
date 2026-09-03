@@ -182,7 +182,7 @@ export interface CostSheetData {
 }
 
 export function CostSheetPDF({ data }: { data: CostSheetData }) {
-  const tanggalFormat = new Date(data.created_at || Date.now()).toLocaleDateString(
+  const tanggalFormat = new Date(data.created_at || "2026-01-01").toLocaleDateString(
     "id-ID",
     { day: "numeric", month: "long", year: "numeric" }
   );

@@ -189,7 +189,7 @@ export interface PODData {
 }
 
 export function PODPDF({ data }: { data: PODData }) {
-  const tanggalFormat = new Date(Date.now()).toLocaleDateString("id-ID", {
+  const tanggalFormat = new Date(data.created_at || "2026-01-01").toLocaleDateString("id-ID", {
     day: "numeric",
     month: "long",
     year: "numeric",
