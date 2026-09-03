@@ -57,12 +57,24 @@ export async function middleware(request: NextRequest) {
     request.nextUrl.pathname.startsWith("/api/documents") ||
     request.nextUrl.pathname.startsWith("/api/wa");
 
+  const isLocalhost =
+    request.headers.get("host")?.includes("localhost") ||
+    request.headers.get("host")?.includes("127.0.0.1");
+
   const isDevBypass =
-    process.env.NODE_ENV !== "production" &&
+    (process.env.NODE_ENV !== "production" || isLocalhost) &&
     (request.nextUrl.searchParams.get("dev_bypass") === "1" ||
       request.cookies.get("dev_bypass")?.value === "1");
 
-  if (!user && !isPublicPath && !isDevBypass) {
+  if (isDevBypass && !user) {
+    const res = NextResponse.next({ request });
+    if (request.nextUrl.searchParams.get("dev_bypass") === "1") {
+      res.cookies.set("dev_bypass", "1", { path: "/", maxAge: 86400 });
+    }
+    return res;
+  }
+
+  if (!user && !isPublicPath) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 

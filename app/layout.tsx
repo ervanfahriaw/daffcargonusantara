@@ -17,9 +17,10 @@ export const metadata: Metadata = {
   description:
     "Aplikasi operasional freight forwarding & customs broker domestik PT Daff Cargo Nusantara.",
   applicationName: "DCN OpsHub",
+  manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
     title: "DCN OpsHub",
   },
   formatDetection: {
@@ -42,12 +43,6 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="id" className={`${plusJakartaSans.variable} h-full`}>
-      <head>
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-      </head>
       <body>
         <OfflineBanner />
         <ServiceWorkerRegister />
